@@ -1,0 +1,39 @@
+{
+  "name": "wisdom-computers",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "preview": "npx serve out",
+    "deploy": "next build && wrangler pages deploy out --project-name wisdom-computers --branch main --commit-dirty=true"
+  },
+  "dependencies": {
+    "@base-ui/react": "^1.9.0",
+    "@number-flow/react": "^0.6.2",
+    "@supabase/supabase-js": "^2.119.0",
+    "browser-image-compression": "^2.0.2",
+    "class-variance-authority": "^0.7.1",
+    "clsx": "^2.1.1",
+    "cmdk": "^1.1.1",
+    "geist": "^1.9.2",
+    "lucide-react": "^1.72.0",
+    "motion": "^14.13.0",
+    "next": "^15.5.29",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1",
+    "sonner": "^2.0.8",
+    "tailwind-merge": "^3.7.0",
+    "vaul": "^1.1.2",
+    "zustand": "^5.1.0"
+  },
+  "devDependencies": {
+    "@tailwindcss/postcss": "^4.3.5",
+    "@types/node": "^22",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19",
+    "tailwindcss": "^4.3.5",
+    "typescript": "^5.9",
+    "wrangler": "^4.161.0"
+  }
+}

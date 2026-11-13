@@ -1,0 +1,22 @@
+{
+  "id": "/",
+  "name": "Wisdom Computers",
+  "short_name": "Wisdom",
+  "description": "Live stock, courses and WhatsApp ordering from Wisdom Computers, Pratap Nagar, Jaipur.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f3eee7",
+  "theme_color": "#f3eee7",
+  "lang": "en-IN",
+  "categories": ["shopping", "education"],
+  "icons": [
+    { "src": "/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
+    { "src": "/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
+    { "src": "/icons/maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Laptops in stock", "url": "/products/?c=laptop", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] },
+    { "name": "Courses", "url": "/courses/", "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }] }
+  ]
+}
