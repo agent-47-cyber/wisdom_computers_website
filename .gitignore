@@ -6,3 +6,6 @@ out
 shots
 *.tsbuildinfo
 next-env.d.ts
+
+# Docs stay local
+*.md
