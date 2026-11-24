@@ -2,9 +2,9 @@
 import Link from "next/link";
 import { useEffect, useMemo, useState } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { ChevronLeft, ChevronRight, GraduationCap, Laptop, MapPin, Package, Phone, Printer, Sparkles, Star, Wrench } from "lucide-react";
+import { ChevronLeft, ChevronRight, GraduationCap, Laptop, MapPin, Package, Phone, Printer, Sparkles, Wrench } from "lucide-react";
 import { useCatalog, useQuickView } from "@/lib/store";
-import { categoryLabel, CONDITIONS, SITE, waLink } from "@/lib/site";
+import { categoryLabel, SITE, waLink } from "@/lib/site";
 import type { Product } from "@/lib/data";
 import { ArrowChip, buttonVariants } from "@/components/ui/button";
 import { Count, Price } from "@/components/ui/price";
@@ -13,8 +13,6 @@ import { ProductArt } from "@/components/shop/ProductArt";
 import { OpenStatus } from "@/components/home/sections";
 import { BorderBeam, DotGrid, MagicCard, WordRotate } from "@/components/magic/effects";
 import { cn } from "@/lib/utils";
-
-const CONDITION_COLORS: Record<string, string> = { "Like New": "#22c55e", Good: "#3b82f6", Fair: "#f59e0b" };
 
 const HERO_WORDS = [
   "RS-CIT & Tally Classes",
@@ -318,13 +316,9 @@ export default function HeroBento() {
         </div>
 
         {/* Live stats column */}
-        <div className="grid grid-cols-3 gap-3 lg:grid-cols-1">
+        <div className="grid grid-cols-2 gap-3 lg:grid-cols-1">
           <StatTile href="/courses/" icon={<GraduationCap className="h-4 w-4" />} label="Computer classes" sub="RS-CIT, Tally, Typing">
             <Count value={courses?.length ?? 8} />
-          </StatTile>
-          <StatTile href={SITE.mapsUrl} external icon={<Star className="h-4 w-4 fill-current" />} label="Google rating" sub={`${SITE.google.reviews} real reviews`}>
-            {SITE.google.rating}
-            <span className="text-[16px] font-medium text-muted">/5</span>
           </StatTile>
           <StatTile
             href="/products/"
@@ -338,30 +332,7 @@ export default function HeroBento() {
       </div>
 
       {/* Second Bento Row */}
-      <div className="mt-3 grid gap-3 md:grid-cols-3">
-        <MagicCard className="card p-5">
-          <p className="text-[16px] font-medium">Shop by condition</p>
-          <div className="mt-4 flex gap-2">
-            {CONDITIONS.map((c) => {
-              const count = inStock.filter((p) => p.condition === c).length;
-              return (
-                <Link
-                  key={c}
-                  href={`/products/?cond=${encodeURIComponent(c)}`}
-                  className="group flex flex-1 flex-col items-center gap-2 rounded-2xl bg-surface px-2 py-3 text-center transition-[background-color,transform] hover:bg-line active:scale-[0.97]"
-                >
-                  <span className="h-5 w-5 rounded-full ring-4 ring-white transition-[scale] group-hover:scale-110" style={{ background: CONDITION_COLORS[c] }} />
-                  <span className="text-[12.5px] font-medium leading-tight">
-                    {c}
-                    <br />
-                    <span className="font-normal text-muted">{inStock.length > 0 ? count : "Browse"}</span>
-                  </span>
-                </Link>
-              );
-            })}
-          </div>
-        </MagicCard>
-
+      <div className="mt-3 grid gap-3 md:grid-cols-2">
         {newest ? (
           <button onClick={() => openProduct(newest.id)} className="block h-full text-left">
             <MagicCard className="card card-hover relative flex h-full min-h-[150px] flex-row items-stretch overflow-hidden">
