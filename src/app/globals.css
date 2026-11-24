@@ -74,12 +74,6 @@ p { text-wrap: pretty; }
   background-size: 20px 20px;
 }
 
-/* Animated border beam (Magic UI) */
-@property --beam-angle {
-  syntax: "<angle>";
-  initial-value: 0deg;
-  inherits: false;
-}
 .border-beam {
   padding: 1.5px;
   background: conic-gradient(from var(--beam-angle), transparent 0deg 260deg, rgba(255, 122, 26, 0.95) 315deg, rgba(255, 224, 185, 0.95) 345deg, transparent 360deg);
@@ -89,12 +83,19 @@ p { text-wrap: pretty; }
   mask-composite: exclude;
   animation: beam-spin 6s linear infinite;
 }
+}
+
+/* Animated border beam property must live at top-level (outside @layer) */
+@property --beam-angle {
+  syntax: "<angle>";
+  initial-value: 0deg;
+  inherits: false;
+}
 @keyframes beam-spin {
   to { --beam-angle: 360deg; }
 }
 @media (prefers-reduced-motion: reduce) {
   .border-beam { animation: none; opacity: 0.35; }
-}
 }
 
 @media (prefers-reduced-motion: no-preference) {
