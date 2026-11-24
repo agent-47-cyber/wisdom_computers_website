@@ -2,37 +2,45 @@
 import { useState } from "react";
 import { Clock, Target } from "lucide-react";
 import type { Course } from "@/lib/data";
-import { SITE, waLink } from "@/lib/site";
+import { SITE, courseGroup, COURSE_GROUPS, waLink } from "@/lib/site";
 import { Price } from "@/components/ui/price";
 import { ArrowChip, Button, buttonVariants } from "@/components/ui/button";
 import { Input, Label } from "@/components/ui/input";
 import { ResponsiveModal } from "@/components/ui/responsive-modal";
 import { WhatsAppIcon } from "@/components/ui/icons";
+import { MagicCard } from "@/components/magic/effects";
 import { cn } from "@/lib/utils";
 
 const SLOTS = ["Morning", "Afternoon", "Evening"] as const;
 
 export default function CourseCard({ c, index }: { c: Course; index?: number }) {
   const [open, setOpen] = useState(false);
+  const groupId = courseGroup(c.name);
+  const groupLabel = COURSE_GROUPS.find((g) => g.id === groupId)?.label ?? "Course";
   return (
     <>
-      <article className="card card-hover flex h-full flex-col p-6">
-        <div className="flex items-start justify-between gap-4">
-          {index != null && <span className="font-mono text-[12px] text-muted">{String(index + 1).padStart(2, "0")}</span>}
-          <span className="text-right text-[15px] font-medium">
-            <Price value={c.fee} ask="Fee on WhatsApp" className={c.fee == null ? "text-muted font-normal text-[13px]" : ""} />
-          </span>
-        </div>
-        <h3 className="mt-8 text-[26px] leading-[1.1] tracking-tight">{c.name}</h3>
-        {c.description && <p className="mt-2 text-[15px] leading-relaxed text-muted">{c.description}</p>}
-        <ul className="mt-5 space-y-2 text-[14px]">
-          {c.exam_for && <li className="flex gap-2.5"><Target className="mt-0.5 h-4 w-4 shrink-0 text-accent" strokeWidth={1.75} aria-hidden="true" />{c.exam_for}</li>}
-          {c.duration && <li className="flex gap-2.5"><Clock className="mt-0.5 h-4 w-4 shrink-0 text-accent" strokeWidth={1.75} aria-hidden="true" />{c.duration}{c.batch_timings ? ` · ${c.batch_timings}` : ""}</li>}
-        </ul>
-        <Button variant="brand" className="mt-6 w-full justify-between pr-1.5" onClick={() => setOpen(true)}>
-          Ask about the next batch <ArrowChip className="h-8 w-8" />
-        </Button>
-      </article>
+      <MagicCard className="card card-hover h-full p-6">
+        <article className="flex h-full flex-col">
+          <div className="flex items-center justify-between gap-3">
+            <div className="flex items-center gap-2">
+              {index != null && <span className="font-mono text-[12px] text-muted">{String(index + 1).padStart(2, "0")}</span>}
+              <span className="rounded-full bg-accent-soft px-2.5 py-0.5 text-[11.5px] font-medium text-accent-strong">{groupLabel}</span>
+            </div>
+            <span className="text-right text-[15px] font-medium">
+              <Price value={c.fee} ask="Fee on WhatsApp" className={c.fee == null ? "text-muted font-normal text-[13px]" : ""} />
+            </span>
+          </div>
+          <h3 className="mt-6 text-[25px] leading-[1.1] tracking-tight">{c.name}</h3>
+          {c.description && <p className="mt-2 text-[14.5px] leading-relaxed text-muted">{c.description}</p>}
+          <ul className="mb-6 mt-5 space-y-2 text-[14px]">
+            {c.exam_for && <li className="flex gap-2.5"><Target className="mt-0.5 h-4 w-4 shrink-0 text-accent" strokeWidth={1.75} aria-hidden="true" />{c.exam_for}</li>}
+            {c.duration && <li className="flex gap-2.5"><Clock className="mt-0.5 h-4 w-4 shrink-0 text-accent" strokeWidth={1.75} aria-hidden="true" />{c.duration}{c.batch_timings ? ` · ${c.batch_timings}` : ""}</li>}
+          </ul>
+          <Button variant="brand" className="mt-auto w-full justify-between pr-1.5" onClick={() => setOpen(true)}>
+            Ask about the next batch <ArrowChip className="h-8 w-8" />
+          </Button>
+        </article>
+      </MagicCard>
       <EnquiryModal course={c} open={open} onOpenChange={setOpen} />
     </>
   );

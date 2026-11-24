@@ -11,6 +11,7 @@ import { CategoryIcon, WhatsAppIcon } from "@/components/ui/icons";
 import { ArrowChip, buttonVariants } from "@/components/ui/button";
 import { Count } from "@/components/ui/price";
 import { Marquee } from "@/components/magic/marquee";
+import { MagicCard } from "@/components/magic/effects";
 import { cn } from "@/lib/utils";
 
 /* ─── shared ─────────────────────────────────────────────────────────────── */
@@ -42,10 +43,10 @@ export function OpenStatus({ className }: { className?: string }) {
 /* ─── value strip (Onetech) ──────────────────────────────────────────────── */
 
 const VALUES = [
-  { I: Store, t: "Check it in person", d: "See it at the counter before you pay" },
-  { I: BadgeIndianRupee, t: "Price on WhatsApp", d: "Ask, compare, agree in one chat" },
-  { I: Wrench, t: "Repairs in the shop", d: "Laptops and desktops" },
-  { I: Printer, t: "Printing and forms", d: "Toner refill, online forms" },
+  { I: Store, t: "Classes & typing center", d: "RS-CIT, Tally, Excel, C/C++, Typing" },
+  { I: BadgeIndianRupee, t: "UPI, Card & NFC", d: "Google Pay, debit card & cash" },
+  { I: Wrench, t: "In-store & onsite repair", d: "Laptops, desktops & installation" },
+  { I: Printer, t: "Printing, toner & forms", d: "Color/B&W print, online forms" },
   { I: Clock, t: "Open 8 am – 9 pm", d: "Monday to Saturday" },
 ];
 
@@ -68,6 +69,7 @@ export function ValueStrip() {
 
 export function CategoryGrid() {
   const { products } = useCatalog();
+  const totalInStock = (products ?? []).filter((p) => p.in_stock).length;
   return (
     <section className="wrap pt-20">
       <SectionHead title="Shop by category" action={<Link href="/products/" className="text-[14px] font-medium underline-offset-4 hover:underline">See all</Link>} />
@@ -75,12 +77,16 @@ export function CategoryGrid() {
         {CATEGORIES.map((c) => {
           const n = (products ?? []).filter((p) => p.in_stock && p.category === c.id).length;
           return (
-            <Link key={c.id} href={`/products/?c=${c.id}`} className="card card-hover group flex w-[140px] shrink-0 snap-start flex-col items-center p-3 text-center md:w-auto">
-              <span className="stage grid aspect-square w-full place-items-center rounded-[22px]">
-                <CategoryIcon category={c.id} strokeWidth={1.2} className="h-12 w-12 text-ink transition-[scale] duration-300 group-hover:scale-110" />
-              </span>
-              <span className="mt-3 text-[14.5px] font-medium leading-tight">{c.label}</span>
-              <span className="mb-1 text-[12.5px] text-muted">{products ? <><Count value={n} /> in stock</> : " "}</span>
+            <Link key={c.id} href={`/products/?c=${c.id}`} className="group w-[140px] shrink-0 snap-start md:w-auto">
+              <MagicCard className="card card-hover flex h-full flex-col items-center p-3 text-center">
+                <span className="stage grid aspect-square w-full place-items-center rounded-[22px]">
+                  <CategoryIcon category={c.id} strokeWidth={1.25} className="h-12 w-12 text-ink transition-[scale,color] duration-300 group-hover:scale-110 group-hover:text-accent" />
+                </span>
+                <span className="mt-3 text-[14.5px] font-medium leading-tight">{c.label}</span>
+                <span className="mb-1 text-[12.5px] text-muted">
+                  {products ? (totalInStock > 0 ? <><Count value={n} /> in stock</> : "Check availability") : " "}
+                </span>
+              </MagicCard>
             </Link>
           );
         })}
@@ -189,12 +195,14 @@ export function Services() {
         {SERVICES.map((s) => {
           const I = SERVICE_ICONS[s.id];
           return (
-            <a key={s.id} href={waLink(s.ask)} target="_blank" rel="noopener" className="card card-hover relative flex flex-col p-6">
-              <span className="grid h-12 w-12 place-items-center rounded-full bg-accent-soft text-accent"><I className="h-5 w-5" strokeWidth={1.8} /></span>
-              <ArrowChip className="absolute right-5 top-5" />
-              <h3 className="mt-8 text-[21px] leading-tight">{s.title}</h3>
-              <p className="mt-2 text-[14.5px] leading-relaxed text-muted">{s.body}</p>
-              <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-medium text-wa-ink"><WhatsAppIcon className="h-4 w-4" /> Describe it on WhatsApp</span>
+            <a key={s.id} href={waLink(s.ask)} target="_blank" rel="noopener" className="block h-full">
+              <MagicCard className="card card-hover relative flex h-full flex-col p-6">
+                <span className="grid h-12 w-12 place-items-center rounded-full bg-accent-soft text-accent"><I className="h-5 w-5" strokeWidth={1.8} /></span>
+                <ArrowChip className="absolute right-5 top-5" />
+                <h3 className="mt-8 text-[21px] leading-tight">{s.title}</h3>
+                <p className="mt-2 text-[14.5px] leading-relaxed text-muted">{s.body}</p>
+                <span className="mt-auto inline-flex items-center gap-1.5 pt-6 text-[14px] font-medium text-wa-ink"><WhatsAppIcon className="h-4 w-4" /> Describe it on WhatsApp</span>
+              </MagicCard>
             </a>
           );
         })}

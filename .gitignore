@@ -1,11 +1,11 @@
 node_modules
 .next
 out
+.wrangler
+supabase/.temp
 .env.local
 .taste-skill
 shots
 *.tsbuildinfo
 next-env.d.ts
-
-# Docs stay local
 *.md

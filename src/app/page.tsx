@@ -1,6 +1,7 @@
 import Link from "next/link";
 import SiteShell from "@/components/layout/SiteShell";
 import HeroBento from "@/components/home/HeroBento";
+import WorkshopTools from "@/components/home/WorkshopTools";
 import { BrandStrip, CategoryGrid, FeaturedProducts, HowItWorks, PromoBanners, SectionHead, Services, ValueStrip, Visit } from "@/components/home/sections";
 import CourseExplorer from "@/components/shop/CourseExplorer";
 import { ArrowChip, buttonVariants } from "@/components/ui/button";
@@ -13,6 +14,7 @@ export default function Home() {
       <ValueStrip />
       <CategoryGrid />
       <FeaturedProducts />
+      <WorkshopTools />
       <PromoBanners />
       <BrandStrip />
       <section className="wrap pt-20">

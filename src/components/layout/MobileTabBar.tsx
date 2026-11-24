@@ -27,8 +27,8 @@ export default function MobileTabBar() {
         </Link>
         <div className="flex flex-1 items-start justify-center">
           <a href={waLink(`Hi ${SITE.name}, I have a question.`)} target="_blank" rel="noopener" aria-label="Chat on WhatsApp"
-            className="-mt-6 grid h-16 w-16 place-items-center rounded-full bg-ink text-white shadow-[0_12px_24px_-8px_rgb(18_18_18/.5)] ring-[6px] ring-bg transition-[scale] active:scale-[0.92]">
-            <WhatsAppIcon className="h-7 w-7 text-brand" />
+            className="-mt-6 grid h-16 w-16 place-items-center rounded-full bg-wa text-white shadow-[0_12px_24px_-8px_rgb(26_158_85/.55)] ring-[6px] ring-bg transition-[scale,background-color] hover:bg-wa-strong active:scale-[0.92]">
+            <WhatsAppIcon className="h-7 w-7 text-white" />
           </a>
         </div>
         <button onClick={() => openSaved(true)} className={cn(tab, "relative text-muted")} aria-label={`Saved items (${count})`}>

@@ -3,7 +3,7 @@ export const SITE = {
   name: "Wisdom Computers",
   tagline: "Computer store, classes and typing center",
   city: "Jaipur",
-  street: "Kumbha Marg, Sector 8",
+  street: "86/169, Kumbha Marg, Sector 8",
   area: "Pratap Nagar, Jaipur 302033",
   phone: "+91 98872 57421",
   phoneHref: "tel:+919887257421",
@@ -18,7 +18,7 @@ export const SITE = {
   mapsUrl: "https://www.google.com/maps/search/?api=1&query=Wisdom+Computers+Kumbha+Marg+Sector+8+Pratap+Nagar+Jaipur",
   // Google rating as shown on the Business Profile — update when it changes
   google: { rating: 4.3, reviews: 46, asOf: "Nov 2026" },
-  url: "https://wisdomcomputers.pages.dev",
+  url: "https://wisdom-computers.pages.dev",
 };
 
 export const CATEGORIES = [
